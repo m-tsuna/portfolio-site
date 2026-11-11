@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>作ったツール一覧</title>
+  <meta name="description" content="AIエンジニア講座で作った Python ツールの一覧です。">
+  <style>
+    /* 色はここにまとめる（明るい画面と暗い画面で切り替える） */
+    :root {
+      --bg: #f7f7f5;
+      --card: #ffffff;
+      --text: #1f2328;
+      --sub: #59636e;
+      --line: #e3e3e0;
+      --accent: #0f766e;
+      --tag: #eef6f5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111418;
+        --card: #1a1f25;
+        --text: #e6e8eb;
+        --sub: #9aa4af;
+        --line: #2b323a;
+        --accent: #5eead4;
+        --tag: #1f2a2c;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+      line-height: 1.7;
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 48px 16px 64px; }
+    header h1 { font-size: 1.9rem; margin: 0 0 8px; }
+    header p { color: var(--sub); margin: 0; }
+    header a { color: var(--accent); }
+    section { margin-top: 48px; }
+    h2 {
+      font-size: 1.15rem;
+      margin: 0 0 4px;
+      padding-left: 10px;
+      border-left: 4px solid var(--accent);
+    }
+    .lead { color: var(--sub); font-size: .92rem; margin: 0 0 16px 14px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card h3 { font-size: 1rem; margin: 0 0 6px; }
+    .card p { font-size: .9rem; color: var(--sub); margin: 0 0 12px; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span {
+      font-size: .75rem;
+      background: var(--tag);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+    .repo { font-size: .78rem; color: var(--sub); margin-top: 10px; font-family: ui-monospace, Menlo, monospace; }
+    footer { margin-top: 64px; color: var(--sub); font-size: .85rem; text-align: center; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>作ったツール一覧</h1>
+    <p>AIエンジニア講座で作った Python のツールです。カードを押すと GitHub のコードと説明（README）が開きます。<br>
+      GitHub：<a href="https://github.com/m-tsuna">github.com/m-tsuna</a></p>
+  </header>
+
+  <section>
+    <h2>自分のためのツール</h2>
+    <p class="lead">自分の困りごとから考えて作り、毎日使っているツール</p>
+    <div class="grid">
+      <a class="card" href="https://github.com/m-tsuna/buzz-shorts-research">
+        <h3>毎朝のバズショート</h3>
+        <p>いま伸びている YouTube ショートを毎朝3本選び、AI が動画を見て書いた構成の分析と一緒に LINE に届ける。縦動画の発信リサーチ用。</p>
+        <div class="tags"><span>YouTube API</span><span>Gemini</span><span>LINE</span><span>スプレッドシート</span><span>GitHub Actions</span></div>
+        <div class="repo">buzz-shorts-research</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/shopping-list-sorter">
+        <h3>買い物リスト自動仕分け</h3>
+        <p>iPhone から声で登録した品物を、リマインダーのお店別リストへ自動で入れる。知らない品物は AI が考え、決まったお店を覚える。</p>
+        <div class="tags"><span>OpenAI</span><span>iPhone ショートカット</span><span>pytest</span></div>
+        <div class="repo">shopping-list-sorter</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>実務プロジェクト</h2>
+    <p class="lead">仕事の場面を想定して作った試作品</p>
+    <div class="grid">
+      <a class="card" href="https://github.com/m-tsuna/slack-summary-to-line">
+        <h3>Slack の要約を LINE へ</h3>
+        <p>Slack のチャンネルの直近24時間のメッセージを AI で箇条書きに要約し、LINE に送る。</p>
+        <div class="tags"><span>Slack API</span><span>OpenAI</span><span>LINE</span></div>
+        <div class="repo">slack-summary-to-line</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/rakuten-items-to-sheet">
+        <h3>楽天の価格・在庫を記録</h3>
+        <p>決めた商品の価格と在庫を取得し、前回からの値動きを付けてスプレッドシートに保存する。</p>
+        <div class="tags"><span>楽天 API</span><span>スプレッドシート</span></div>
+        <div class="repo">rakuten-items-to-sheet</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/meeting-minutes-docs">
+        <h3>録音から議事録</h3>
+        <p>会議の録音を AI で文字起こしして議事録の形にまとめ、Google ドキュメントに保存する。</p>
+        <div class="tags"><span>Whisper</span><span>OpenAI</span><span>Google Docs</span></div>
+        <div class="repo">meeting-minutes-docs</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>API 連携</h2>
+    <p class="lead">いろいろなサービスの API につなぐ練習</p>
+    <div class="grid">
+      <a class="card" href="https://github.com/m-tsuna/line-morning-notify">
+        <h3>LINE 毎朝のお知らせ</h3>
+        <p>今日の天気と曜日ごとの予定（ゴミの日など）を、毎朝 LINE に1通で届ける。</p>
+        <div class="tags"><span>LINE</span><span>天気</span></div>
+        <div class="repo">line-morning-notify</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/youtube-research">
+        <h3>YouTube 発信リサーチ</h3>
+        <p>キーワードで最近6か月の動画を探し、再生回数の多い順に表示する。</p>
+        <div class="tags"><span>YouTube API</span></div>
+        <div class="repo">youtube-research</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/discord-weather-notify">
+        <h3>Discord 天気通知</h3>
+        <p>東京の今日の天気予報を Discord のチャンネルに通知する。</p>
+        <div class="tags"><span>Discord Webhook</span></div>
+        <div class="repo">discord-weather-notify</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/zoom-meeting-creator">
+        <h3>Zoom 会議の作成</h3>
+        <p>日時を指定して Zoom 会議を作り、会議 ID と参加リンクを表示する。</p>
+        <div class="tags"><span>Zoom API</span></div>
+        <div class="repo">zoom-meeting-creator</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/google-meet-link-creator">
+        <h3>Google Meet のリンク作成</h3>
+        <p>新しいオンライン会議を作り、参加リンクを表示する。</p>
+        <div class="tags"><span>Google Meet API</span></div>
+        <div class="repo">google-meet-link-creator</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/gmail-sender">
+        <h3>Gmail 送信</h3>
+        <p>ターミナルで入力した件名と本文を、確認してから Gmail で送る。</p>
+        <div class="tags"><span>Gmail API</span></div>
+        <div class="repo">gmail-sender</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/google-docs-writer">
+        <h3>Google ドキュメント作成</h3>
+        <p>新しいドキュメントを作り、入力したテキストを書き込む。</p>
+        <div class="tags"><span>Google Docs API</span></div>
+        <div class="repo">google-docs-writer</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/google-drive-uploader">
+        <h3>Google ドライブへアップロード</h3>
+        <p>Mac のファイルを Google ドライブのフォルダにアップロードする。</p>
+        <div class="tags"><span>Google Drive API</span></div>
+        <div class="repo">google-drive-uploader</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/slack-post">
+        <h3>Slack 投稿</h3>
+        <p>入力したメッセージを Slack のチャンネルに投稿する。</p>
+        <div class="tags"><span>Slack API</span></div>
+        <div class="repo">slack-post</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/line-push-message">
+        <h3>LINE メッセージ送信</h3>
+        <p>入力したメッセージを、自分の LINE 公式アカウントから自分に送る。</p>
+        <div class="tags"><span>LINE</span></div>
+        <div class="repo">line-push-message</div>
+      </a>
+      <a class="card" href="https://github.com/m-tsuna/youtube-search">
+        <h3>YouTube 検索</h3>
+        <p>キーワードで動画を検索し、タイトルと URL を表示する。</p>
+        <div class="tags"><span>YouTube API</span></div>
+        <div class="repo">youtube-search</div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Python 基礎</h2>
+    <p class="lead">データを読んで形にする練習</p>
+    <div class="grid">
+      <a class="card" href="https://github.com/m-tsuna/csv-graph-maker">
+        <h3>CSV からグラフ作成</h3>
+        <p>CSV から参加者の所属とスコアを読み込み、3種類のグラフを画像で保存する。</p>
+        <div class="tags"><span>pandas</span><span>matplotlib</span></div>
+        <div class="repo">csv-graph-maker</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>このページは GitHub に push すると Vercel が自動で公開・更新します。</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# 自分のドライブに入るための鍵と許可証（絶対に公開しない）
+credentials.json
+token.json
+.env
+
+# 提出用のファイル
+提出記事.md
+提出記事.html
+
+# Python が自動で作るフォルダ
+__pycache__/
+
+# Mac が自動で作るファイル
+.DS_Store
+
+# Web 開発で手元だけに置く鍵（Vercel のレッスン）
+.env.local
+.vercel
