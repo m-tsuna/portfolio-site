@@ -3,7 +3,7 @@
 AIエンジニア講座で作った Python ツールを、カードで一覧にした Web ページです。
 カードを押すと、それぞれの GitHub リポジトリ（コードと説明）が開きます。
 
-公開 URL：（Vercel で公開したら、ここに貼る）
+公開 URL：https://portfolio-site-zhrq.vercel.app
 
 ## 使う技術
 
