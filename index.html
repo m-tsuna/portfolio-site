@@ -5,26 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>作ったツール一覧</title>
   <meta name="description" content="AIエンジニア講座で作った Python ツールの一覧です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     /* 色はここにまとめる（明るい画面と暗い画面で切り替える） */
     :root {
-      --bg: #f7f7f5;
+      --bg: #f6f5f1;
       --card: #ffffff;
-      --text: #1f2328;
-      --sub: #59636e;
-      --line: #e3e3e0;
+      --text: #1d2021;
+      --sub: #5e6466;
+      --line: #e4e2dc;
       --accent: #0f766e;
-      --tag: #eef6f5;
+      --accent2: #e07a3f;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+      /* 分類ごとの色 */
+      --c-own: #e07a3f;
+      --c-work: #3b6fd8;
+      --c-api: #0f766e;
+      --c-py: #8b5cf6;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #111418;
-        --card: #1a1f25;
-        --text: #e6e8eb;
-        --sub: #9aa4af;
-        --line: #2b323a;
+        --bg: #101315;
+        --card: #191d20;
+        --text: #eceeef;
+        --sub: #9ba3a8;
+        --line: #2a3034;
         --accent: #5eead4;
-        --tag: #1f2a2c;
+        --accent2: #f4a26b;
+        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+        --c-own: #f4a26b;
+        --c-work: #7aa2f7;
+        --c-api: #5eead4;
+        --c-py: #b69cff;
       }
     }
     * { box-sizing: border-box; }
@@ -32,71 +46,110 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
-      line-height: 1.7;
+      font-family: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
     }
-    main { max-width: 960px; margin: 0 auto; padding: 48px 16px 64px; }
-    header h1 { font-size: 1.9rem; margin: 0 0 8px; }
-    header p { color: var(--sub); margin: 0; }
-    header a { color: var(--accent); }
-    section { margin-top: 48px; }
-    h2 {
-      font-size: 1.15rem;
-      margin: 0 0 4px;
-      padding-left: 10px;
-      border-left: 4px solid var(--accent);
+    main { max-width: 1000px; margin: 0 auto; padding: 0 16px 72px; }
+
+    /* いちばん上の大きな見出し */
+    .hero { position: relative; padding: 72px 0 40px; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; inset: -40% -20% auto auto; width: 520px; height: 520px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent2) 28%, transparent), transparent 65%);
+      z-index: -1;
     }
-    .lead { color: var(--sub); font-size: .92rem; margin: 0 0 16px 14px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
+    .hero::after {
+      content: ""; position: absolute; inset: auto auto -60% -15%; width: 460px; height: 460px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 65%);
+      z-index: -1;
     }
+    .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .18em; color: var(--accent); margin: 0 0 12px; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 900; line-height: 1.25; margin: 0 0 16px; letter-spacing: .02em; }
+    .hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent2) 40%, transparent) 62%); }
+    .hero p { color: var(--sub); margin: 0; max-width: 620px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px; box-shadow: var(--shadow); }
+    .stat b { display: block; font-size: 1.6rem; font-weight: 900; line-height: 1.2; }
+    .stat span { font-size: .8rem; color: var(--sub); }
+    .gh {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 24px;
+      background: var(--text); color: var(--bg); text-decoration: none;
+      padding: 10px 18px; border-radius: 999px; font-weight: 700; font-size: .9rem;
+    }
+    .gh:hover { opacity: .85; }
+
+    /* 分類ごとのまとまり */
+    section { margin-top: 56px; --c: var(--c-api); }
+    section.own { --c: var(--c-own); }
+    section.work { --c: var(--c-work); }
+    section.py { --c: var(--c-py); }
+    .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+    .num { font-size: .8rem; font-weight: 900; color: var(--c); letter-spacing: .1em; }
+    h2 { font-size: 1.35rem; font-weight: 900; margin: 0; }
+    .lead { color: var(--sub); font-size: .88rem; margin: 0; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .own .grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
     .card {
-      display: flex;
-      flex-direction: column;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 16px 18px;
-      text-decoration: none;
-      color: inherit;
-      transition: border-color .15s, transform .15s;
+      position: relative; display: flex; flex-direction: column;
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 20px 22px 18px; text-decoration: none; color: inherit;
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card h3 { font-size: 1rem; margin: 0 0 6px; }
-    .card p { font-size: .9rem; color: var(--sub); margin: 0 0 12px; flex: 1; }
+    .card::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: var(--c); }
+    .card:hover { transform: translateY(-4px); border-color: var(--c); }
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 8px; }
+    .own .card h3 { font-size: 1.25rem; }
+    .card p { font-size: .9rem; color: var(--sub); margin: 0 0 14px; flex: 1; }
+    .badge {
+      align-self: flex-start; font-size: .72rem; font-weight: 700; color: var(--c);
+      border: 1px solid var(--c); border-radius: 999px; padding: 1px 10px; margin-bottom: 10px;
+    }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tags span {
-      font-size: .75rem;
-      background: var(--tag);
-      color: var(--accent);
-      border-radius: 999px;
-      padding: 2px 10px;
+      font-size: .74rem; font-weight: 500; color: var(--c);
+      background: color-mix(in srgb, var(--c) 12%, transparent);
+      border-radius: 999px; padding: 2px 10px;
     }
-    .repo { font-size: .78rem; color: var(--sub); margin-top: 10px; font-family: ui-monospace, Menlo, monospace; }
-    footer { margin-top: 64px; color: var(--sub); font-size: .85rem; text-align: center; }
+    .repo {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .76rem; color: var(--sub); margin-top: 14px; padding-top: 12px;
+      border-top: 1px dashed var(--line); font-family: ui-monospace, Menlo, monospace;
+    }
+    .repo::after { content: "→"; font-family: inherit; color: var(--c); transition: transform .2s; }
+    .card:hover .repo::after { transform: translateX(4px); }
+    footer { margin-top: 72px; color: var(--sub); font-size: .82rem; text-align: center; }
+    @media (prefers-reduced-motion: reduce) { .card, .repo::after { transition: none; } }
   </style>
 </head>
 <body>
 <main>
-  <header>
-    <h1>作ったツール一覧</h1>
-    <p>AIエンジニア講座で作った Python のツールです。カードを押すと GitHub のコードと説明（README）が開きます。<br>
-      GitHub：<a href="https://github.com/m-tsuna">github.com/m-tsuna</a></p>
+  <header class="hero">
+    <p class="eyebrow">PORTFOLIO</p>
+    <h1>困りごとを、<br><em>小さなツール</em>で片づける。</h1>
+    <p>AIエンジニア講座で作った Python のツールです。API と AI をつないで、毎日の面倒な作業を短くしています。カードを押すと GitHub のコードと説明（README）が開きます。</p>
+    <div class="stats">
+      <div class="stat"><b>17</b><span>作ったツール</span></div>
+      <div class="stat"><b>10+</b><span>つないだ API</span></div>
+      <div class="stat"><b>2</b><span>毎日使っているもの</span></div>
+    </div>
+    <a class="gh" href="https://github.com/m-tsuna">GitHub を見る →</a>
   </header>
 
-  <section>
-    <h2>自分のためのツール</h2>
-    <p class="lead">自分の困りごとから考えて作り、毎日使っているツール</p>
+  <section class="own">
+    <div class="sec-head"><span class="num">01</span><h2>自分のためのツール</h2><p class="lead">自分の困りごとから考えて作り、毎日使っているツール</p></div>
     <div class="grid">
       <a class="card" href="https://github.com/m-tsuna/buzz-shorts-research">
+        <span class="badge">毎日使っている</span>
         <h3>毎朝のバズショート</h3>
         <p>いま伸びている YouTube ショートを毎朝3本選び、AI が動画を見て書いた構成の分析と一緒に LINE に届ける。縦動画の発信リサーチ用。</p>
         <div class="tags"><span>YouTube API</span><span>Gemini</span><span>LINE</span><span>スプレッドシート</span><span>GitHub Actions</span></div>
         <div class="repo">buzz-shorts-research</div>
       </a>
       <a class="card" href="https://github.com/m-tsuna/shopping-list-sorter">
+        <span class="badge">毎日使っている</span>
         <h3>買い物リスト自動仕分け</h3>
         <p>iPhone から声で登録した品物を、リマインダーのお店別リストへ自動で入れる。知らない品物は AI が考え、決まったお店を覚える。</p>
         <div class="tags"><span>OpenAI</span><span>iPhone ショートカット</span><span>pytest</span></div>
@@ -105,9 +158,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>実務プロジェクト</h2>
-    <p class="lead">仕事の場面を想定して作った試作品</p>
+  <section class="work">
+    <div class="sec-head"><span class="num">02</span><h2>実務プロジェクト</h2><p class="lead">仕事の場面を想定して作った試作品</p></div>
     <div class="grid">
       <a class="card" href="https://github.com/m-tsuna/slack-summary-to-line">
         <h3>Slack の要約を LINE へ</h3>
@@ -130,9 +182,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>API 連携</h2>
-    <p class="lead">いろいろなサービスの API につなぐ練習</p>
+  <section class="api">
+    <div class="sec-head"><span class="num">03</span><h2>API 連携</h2><p class="lead">いろいろなサービスの API につなぐ練習</p></div>
     <div class="grid">
       <a class="card" href="https://github.com/m-tsuna/line-morning-notify">
         <h3>LINE 毎朝のお知らせ</h3>
@@ -203,9 +254,8 @@
     </div>
   </section>
 
-  <section>
-    <h2>Python 基礎</h2>
-    <p class="lead">データを読んで形にする練習</p>
+  <section class="py">
+    <div class="sec-head"><span class="num">04</span><h2>Python 基礎</h2><p class="lead">データを読んで形にする練習</p></div>
     <div class="grid">
       <a class="card" href="https://github.com/m-tsuna/csv-graph-maker">
         <h3>CSV からグラフ作成</h3>
